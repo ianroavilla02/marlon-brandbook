@@ -330,7 +330,7 @@ body{background:#fff;color:#111}.hero{min-height:auto;padding:40px 0}
 <div class="story-row"><span class="story-key">LUGAR</span><p class="story-val">Bogot&aacute;, Colombia. La ciudad real &mdash; no idealizada, no distopificada. Vista con el filtro nost&aacute;lgico de quien creci&oacute; entre pantallas. Las microculturas bogotanas, el underground que vive en la frontera con lo comercial.</p></div>
 <div class="story-row"><span class="story-key">TIEMPO</span><p class="story-val">Los 2000 extendidos. La &uacute;ltima generaci&oacute;n que toc&oacute; lo anal&oacute;gico y la primera que creci&oacute; con lo digital. El reggaet&oacute;n de Daddy Yankee sonando en los cumplea&ntilde;os. Todo comprimido en un sonido que se siente como recuerdo y como futuro al mismo tiempo.</p></div>
 <div class="story-row"><span class="story-key">ATM&Oacute;SFERA</span><p class="story-val">Pantallas de tubo con scanlines. El azul de un BSOD de Windows a las 3am. Glitch como emoci&oacute;n, no como error. Lo-fi intencional: webcams, c&aacute;maras an&aacute;logas, grabaciones de pantalla con zoom. Todo se ve como si lo hubieras encontrado en un disco duro viejo &mdash; pero suena nuevo.</p></div>
-<div class="story-row"><span class="story-key">PERSONAJES</span><p class="story-val">Gente real de Bogot&aacute; con estilo &uacute;nico. No disfrazados, no uniformados &mdash; pero se nota que vienen del mismo universo. El parche, los amigos, el productor paisa de 18 a&ntilde;os. Nadie est&aacute; actuando.</p></div>
+<div class="story-row"><span class="story-key">PERSONAJES</span><p class="story-val">Gente real de Bogot&aacute; con estilo &uacute;nico. No disfrazados, no uniformados &mdash; pero se nota que vienen del mismo universo. Nadie est&aacute; actuando.</p></div>
 <div class="story-row"><span class="story-key">RELEASES</span><p class="story-val"><strong>No dio para mas :/</strong> &mdash; Primer single oficial<br><strong>Tentaci&oacute;n</strong> &mdash; Segundo single<br><strong>Genesis</strong> &mdash; &ldquo;La primera vez que sent&iacute; que lo pod&iacute;a hacer&rdquo;<br>Formato: singles consecutivos con coherencia visual de era</p></div>
 </div>
 
@@ -591,4 +591,42 @@ label.textContent='Copied!';label.style.opacity='1';
 setTimeout(()=>{label.textContent='Click to copy';label.style.opacity=''},1500);
 });
 }
+
+
+(function(){
+  var cards=document.querySelectorAll('.catalog-card');
+  var titleEl=document.getElementById('catTitle');
+  var total=cards.length;
+  var current=0;
+  function layout(){
+    cards.forEach(function(card,i){
+      var offset=i-current;
+      if(offset>Math.floor(total/2))offset-=total;
+      if(offset<-Math.floor(total/2))offset+=total;
+      var absOff=Math.abs(offset);
+      var tx=offset*200;
+      var tz=-absOff*120;
+      var ry=offset*-18;
+      var scale=absOff===0?1:Math.max(.7,1-absOff*.12);
+      var opacity=absOff>2?.3:absOff===0?1:.65;
+      card.style.transform='translateX('+tx+'px) translateZ('+tz+'px) rotateY('+ry+'deg) scale('+scale+')';
+      card.style.opacity=opacity;
+      card.style.zIndex=10-absOff;
+      card.classList.toggle('active',offset===0);
+    });
+    if(titleEl)titleEl.textContent=cards[current].dataset.title.toUpperCase();
+  }
+  function goTo(i){current=((i%total)+total)%total;layout();resetTimer();}
+  var timer=setInterval(function(){current=(current+1)%total;layout();},3000);
+  function resetTimer(){clearInterval(timer);timer=setInterval(function(){current=(current+1)%total;layout();},3000);}
+  cards.forEach(function(card){card.addEventListener('click',function(){goTo(+card.dataset.index);});});
+  var stage=document.querySelector('.catalog-stage');
+  if(stage){
+    var startX=0;
+    stage.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;},{passive:true});
+    stage.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>40)goTo(current+(dx<0?1:-1));},{passive:true});
+  }
+  layout();
+})();
+
 </script>
