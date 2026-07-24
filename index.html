@@ -253,6 +253,14 @@ body{background:#fff;color:#111}.hero{min-height:auto;padding:40px 0}
 .catalog-info{text-align:center;margin-top:12px;min-height:50px}
 .catalog-info .ci-title{font-family:var(--font-display);font-size:2rem;color:var(--void);letter-spacing:.06em;transition:opacity .3s}
 .catalog-info .ci-sub{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-top:4px}
+
+.disco-row{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;padding:40px 0}
+.disco-row .catalog{border:none;padding:24px}
+.disco-row .mood-block{padding:20px 40px;border:none;background:transparent;min-height:auto}
+.disco-row .mood-block .mood-bg-text{display:none}
+.disco-row .mood-inner{padding:0}
+.disco-row .mood-quote{font-size:clamp(.9rem,1.2vw,1.1rem)}
+@media(max-width:900px){.disco-row{grid-template-columns:1fr}}
 </style>
 
 <!-- NAV -->
@@ -344,15 +352,7 @@ body{background:#fff;color:#111}.hero{min-height:auto;padding:40px 0}
 </div>
 </section>
 
-<!-- MOOD -->
-<div class="mood-block reveal">
-<div class="mood-bg-text">2000</div>
-<div class="mood-inner">
-<blockquote class="mood-quote">Es traducir emociones reales &mdash; las que se sienten lento, las que duelen, las que se bailan &mdash; al lenguaje de una generaci&oacute;n que consume todo en 15 segundos. El proyecto es el puente entre la humanidad anal&oacute;gica y las formas modernas de conectar.</blockquote>
-</div>
-</div>
-
-<!-- 03 AUDIENCIA -->
+<div class="disco-row">
 <section id="lanzamientos" class="catalog reveal">
   <div class="catalog-stage">
     <div class="catalog-track" id="catalogTrack">
@@ -372,6 +372,16 @@ body{background:#fff;color:#111}.hero{min-height:auto;padding:40px 0}
     <p class="ci-sub">MARLON VILLAMIL</p>
   </div>
 </section>
+<div class="mood-block reveal">
+<div class="mood-bg-text">2000</div>
+<div class="mood-inner">
+<blockquote class="mood-quote">Es traducir emociones reales &mdash; las que se sienten lento, las que duelen, las que se bailan &mdash; al lenguaje de una generaci&oacute;n que consume todo en 15 segundos. El proyecto es el puente entre la humanidad anal&oacute;gica y las formas modernas de conectar.</blockquote>
+</div>
+</div>
+</div>
+
+<!-- 03 AUDIENCIA -->
+
 <section id="audiencia" class="sec reveal" style="text-align:center">
 <p class="sec-tag" style="justify-content:center">Secci&oacute;n 03</p>
 <h2 class="sec-title">AUDIENCIA<span class="accent">.</span></h2>
